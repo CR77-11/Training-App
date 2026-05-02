@@ -592,8 +592,9 @@ function drawWeightChart(entries){
     const slow = START_WEIGHT - (i*0.5/7);
     const fast = START_WEIGHT - (i*0.8/7);
     ctx.fillRect(x(i), y(slow), 2, y(fast)-y(slow));
+  }
 
-    // Zielgewicht Linie
+      // Zielgewicht Linie
 ctx.strokeStyle="#888";
 ctx.setLineDash([2,4]);
 ctx.beginPath();
@@ -601,8 +602,7 @@ ctx.moveTo(x0, y(TARGET_WEIGHT));
 ctx.lineTo(x1, y(TARGET_WEIGHT));
 ctx.stroke();
 ctx.setLineDash([]);
-  }
-
+  
   // Ist-Werte
   if(entries.length){
     ctx.strokeStyle="#1f4e78";
