@@ -541,6 +541,16 @@ function nextTrainingAdvice(data){
 
   return "Nächste Einheit normal nach Plan. Belastung kontrolliert steigern.";
 }
+  
+function movingAverage(entries, windowSize=7){
+  return entries.map((e,i)=>{
+    const start = Math.max(0,i-windowSize+1);
+    const slice = entries.slice(start,i+1);
+    const mean = slice.reduce((s,x)=>s+x.weight,0)/slice.length;
+    return {date:e.date, weight:mean};
+  });
+}
+
 function drawWeightChart(entries){
   const c = weightChart;
   const ctx = c.getContext("2d");
@@ -558,13 +568,12 @@ function drawWeightChart(entries){
     return y0 - ((kg-minW)/(maxW-minW))*(y0-y1);
   }
 
-  function xByDay(day){
+  function x(day){
     return x0 + (day/TOTAL_DAYS)*(x1-x0);
   }
 
   ctx.strokeStyle="#d7e3ef";
   ctx.lineWidth=1;
-
   for(let i=0;i<=5;i++){
     const yy = y0 - i*(y0-y1)/5;
     ctx.beginPath();
@@ -576,30 +585,22 @@ function drawWeightChart(entries){
     ctx.fillText((minW+i*(maxW-minW)/5).toFixed(0)+" kg",5,yy+4);
   }
 
-  ctx.fillStyle="#1f4e78";
-  ctx.font="13px sans-serif";
-  ctx.fillText("Blau: Ist", x0, 18);
-  ctx.fillStyle="#999";
-  ctx.fillText("Grau: Ziel", x0+90, 18);
-  ctx.fillStyle="#f39c12";
-  ctx.fillText("Orange: Prognose", x0+185, 18);
+  // Zielkorridor 0,5–0,8 kg/Woche
+  ctx.fillStyle="rgba(100,100,100,0.12)";
+  for(let i=0;i<=TOTAL_DAYS;i++){
+    const slow = START_WEIGHT - (i*0.5/7);
+    const fast = START_WEIGHT - (i*0.8/7);
+    ctx.fillRect(x(i), y(slow), 2, y(fast)-y(slow));
+  }
 
-  ctx.strokeStyle="#999";
-  ctx.setLineDash([6,6]);
-  ctx.lineWidth=2;
-  ctx.beginPath();
-  ctx.moveTo(x0,y(START_WEIGHT));
-  ctx.lineTo(x1,y(TARGET_WEIGHT));
-  ctx.stroke();
-  ctx.setLineDash([]);
-
+  // Ist-Werte
   if(entries.length){
     ctx.strokeStyle="#1f4e78";
-    ctx.lineWidth=3;
+    ctx.lineWidth=2;
     ctx.beginPath();
 
     entries.forEach((e,i)=>{
-      const xx = xByDay(dayFromDate(e.date));
+      const xx = x(dayFromDate(e.date));
       const yy = y(e.weight);
       if(i===0) ctx.moveTo(xx,yy);
       else ctx.lineTo(xx,yy);
@@ -610,33 +611,61 @@ function drawWeightChart(entries){
     ctx.fillStyle="#1f4e78";
     entries.forEach(e=>{
       ctx.beginPath();
-      ctx.arc(xByDay(dayFromDate(e.date)),y(e.weight),4,0,Math.PI*2);
+      ctx.arc(x(dayFromDate(e.date)),y(e.weight),4,0,Math.PI*2);
       ctx.fill();
     });
   }
 
-  if(entries.length >= 2){
-    const first = entries[0];
-    const last = entries[entries.length-1];
+  // 7-Tage-Trend + Smart-Prognose
+  if(entries.length >= 7){
+    const avg = movingAverage(entries,7);
 
-    const firstDay = dayFromDate(first.date);
-    const lastDay = dayFromDate(last.date);
+    ctx.strokeStyle="#003f7f";
+    ctx.lineWidth=4;
+    ctx.beginPath();
 
-    if(lastDay > firstDay){
-      const rate = (last.weight - first.weight) / (lastDay - firstDay);
-      const projectedEndWeight = last.weight + rate * (TOTAL_DAYS - lastDay);
+    avg.forEach((e,i)=>{
+      const xx = x(dayFromDate(e.date));
+      const yy = y(e.weight);
+      if(i===0) ctx.moveTo(xx,yy);
+      else ctx.lineTo(xx,yy);
+    });
 
-      ctx.strokeStyle="#f39c12";
-      ctx.lineWidth=3;
-      ctx.setLineDash([4,5]);
-      ctx.beginPath();
-      ctx.moveTo(xByDay(lastDay), y(last.weight));
-      ctx.lineTo(xByDay(TOTAL_DAYS), y(projectedEndWeight));
-      ctx.stroke();
-      ctx.setLineDash([]);
+    ctx.stroke();
+
+    if(avg.length >= 10){
+      const last = avg[avg.length-1];
+      const prev = avg[Math.max(0,avg.length-8)];
+
+      const d1 = dayFromDate(prev.date);
+      const d2 = dayFromDate(last.date);
+
+      if(d2 > d1){
+        const rate = (last.weight - prev.weight) / (d2-d1);
+        const projected = last.weight + rate * (TOTAL_DAYS-d2);
+
+        ctx.strokeStyle="#f39c12";
+        ctx.lineWidth=3;
+        ctx.setLineDash([4,5]);
+        ctx.beginPath();
+        ctx.moveTo(x(d2), y(last.weight));
+        ctx.lineTo(x(TOTAL_DAYS), y(projected));
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
     }
   }
-}  
+
+  ctx.font="13px sans-serif";
+  ctx.fillStyle="#1f4e78";
+  ctx.fillText("Ist",x0,18);
+  ctx.fillStyle="#003f7f";
+  ctx.fillText("Trend",x0+45,18);
+  ctx.fillStyle="#999";
+  ctx.fillText("Zielkorridor",x0+105,18);
+  ctx.fillStyle="#f39c12";
+  ctx.fillText("Smart-Prognose",x0+210,18);
+}
 
 function drawLoadChart(data){
   const c = loadChart;
