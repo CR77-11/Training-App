@@ -167,7 +167,7 @@ input,select,textarea{
 </header>
 
 <main>
-
+  
 <section id="track" class="tab active">
 <div class="card">
 <h2>Heutiger Eintrag</h2>
@@ -541,8 +541,7 @@ function nextTrainingAdvice(data){
 
   return "Nächste Einheit normal nach Plan. Belastung kontrolliert steigern.";
 }
-
-  function drawWeightChart(entries){
+function drawWeightChart(entries){
   const c = weightChart;
   const ctx = c.getContext("2d");
   ctx.clearRect(0,0,c.width,c.height);
@@ -637,7 +636,7 @@ function nextTrainingAdvice(data){
       ctx.setLineDash([]);
     }
   }
-}
+}  
 
 function drawLoadChart(data){
   const c = loadChart;
