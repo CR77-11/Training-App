@@ -665,6 +665,37 @@ function drawWeightChart(entries){
   ctx.fillText("Zielkorridor",x0+105,18);
   ctx.fillStyle="#f39c12";
   ctx.fillText("Smart-Prognose",x0+210,18);
+// ===== Zeitachse =====
+ctx.fillStyle="#17324d";
+ctx.font="11px sans-serif";
+
+// Startdatum links
+ctx.fillText(formatDate(START_DATE), x0, y0 + 18);
+
+// Zwischenmarken (alle 4 Wochen)
+for(let w=4; w<=WEEKS; w+=4){
+  const day = w * 7;
+  const date = new Date(START_DATE);
+  date.setDate(date.getDate() + day);
+
+  const xx = x(day);
+
+  // kleine Markierung
+  ctx.strokeStyle="#ccc";
+  ctx.beginPath();
+  ctx.moveTo(xx, y0);
+  ctx.lineTo(xx, y0 + 6);
+  ctx.stroke();
+
+  // Text
+  ctx.fillText(formatDate(date), xx - 20, y0 + 18);
+}
+
+// Enddatum rechts
+const endDate = new Date(START_DATE);
+endDate.setDate(endDate.getDate() + TOTAL_DAYS);
+
+ctx.fillText(formatDate(endDate), x1 - 50, y0 + 18);
 }
 
 function drawLoadChart(data){
