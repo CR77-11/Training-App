@@ -609,6 +609,18 @@ function drawWeightChart(entries){
 
     ctx.stroke();
 
+    // Verlauf unter Ist-Kurve (Premium Look)
+const gradient = ctx.createLinearGradient(0, y1, 0, y0);
+gradient.addColorStop(0, "rgba(31,78,120,0.25)");
+gradient.addColorStop(1, "rgba(31,78,120,0)");
+
+ctx.lineTo(x(dayFromDate(entries[entries.length-1].date)), y0);
+ctx.lineTo(x(dayFromDate(entries[0].date)), y0);
+ctx.closePath();
+
+ctx.fillStyle = gradient;
+ctx.fill();
+    
     ctx.fillStyle="#1f4e78";
     entries.forEach(e=>{
       ctx.beginPath();
