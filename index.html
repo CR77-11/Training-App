@@ -475,9 +475,10 @@ function render(){
   drawLoadChart(data);
 }
 
-function dayFromDate(dateStr){
-  const d = new Date(dateStr+"T00:00:00");
-  return (d - START_DATE) / 86400000;
+function formatDate(d){
+  const day = String(d.getDate()).padStart(2,'0');
+  const month = String(d.getMonth()+1).padStart(2,'0');
+  return day+"."+month+".";
 }
 
 function forecastWeight(entries){
