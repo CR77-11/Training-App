@@ -149,6 +149,24 @@ input,select,textarea{
   min-height:48px;
 
 }
+  .exercise-img{
+  width:100%;
+  border-radius:14px;
+  margin:10px 0 14px;
+  object-fit:cover;
+  max-height:260px;
+}
+
+.exercise-img:hover{
+  transform:scale(1.02);
+  transition:0.2s;
+}
+
+.exercise-card h2::after{
+  content:"  ⌄";
+  font-size:16px;
+  color:var(--muted);
+}
 </style>
 </head>
 
@@ -575,7 +593,7 @@ function toggleExercise(i){
   const el = document.getElementById("exercise-"+i);
   el.style.display = el.style.display === "none" ? "block" : "none";
 }
-  renderExercises();
+  render();
 }
 
 function getData(){
@@ -674,6 +692,7 @@ function render(){
 
   drawWeightChart(weights);
   drawLoadChart(data);
+  renderExercises();
 }
 
 function dayFromDate(dateStr){
