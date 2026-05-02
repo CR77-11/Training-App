@@ -1,30 +1,107 @@
-Trainings-App Pro
-Start 03.05.2026 · Ziel 105 kg → 85 kg · Schulter & Belastung im Blick
-Tracking
-Dashboard
-Plan
-Backup
-Heutiger Eintrag
-Datum
-Training VM
-Kraft AKraft BRudern Zone 2Rudern TechnikMobility / Schulterfrei
-Training NM
-Mobility / SchulterRudern TechnikCoreConditioning lightfrei
-Dauer VM (min)
-Dauer NM (min)
-Belastung VM (1–5)
-Belastung NM (1–5)
-Ø Puls VM
-Ruder-Pace / 500 m
-Schulter (0–5)
-Energie (1–5)
-Gewicht Ist (kg)
-Notizen
-Eintrag speichern
-Letzte Einträge
-Datum
-VM/NM
-Last
-Schulter
-Gewicht
+<!DOCTYPE html>
 
+<html lang="de">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Trainings-App Pro</title>
+
+<style>
+
+body{font-family:sans-serif;background:#f7f9fc;margin:0}
+
+header{background:#1f4e78;color:white;padding:15px;text-align:center}
+
+main{padding:15px}
+
+.card{background:white;padding:15px;border-radius:12px;margin-bottom:10px}
+
+button{padding:10px;border-radius:10px;border:none;background:#1f4e78;color:white;width:100%}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Trainings-App Pro</h1>
+
+</header>
+
+<main>
+
+<div class="card">
+
+<h2>Eintrag</h2>
+
+<input id="date" type="date">
+
+<input id="weight" placeholder="Gewicht">
+
+<input id="load" placeholder="Belastung">
+
+<button onclick="save()">Speichern</button>
+
+</div>
+
+<div class="card">
+
+<h2>Verlauf</h2>
+
+<ul id="list"></ul>
+
+</div>
+
+</main>
+
+<script>
+
+let data = JSON.parse(localStorage.getItem("data")||"[]")
+
+function save(){
+
+let e={
+
+date:document.getElementById("date").value,
+
+weight:document.getElementById("weight").value,
+
+load:document.getElementById("load").value
+
+}
+
+data.push(e)
+
+localStorage.setItem("data",JSON.stringify(data))
+
+render()
+
+}
+
+function render(){
+
+let list=document.getElementById("list")
+
+list.innerHTML=""
+
+data.forEach(e=>{
+
+list.innerHTML+="<li>"+e.date+" - "+e.weight+"kg</li>"
+
+})
+
+}
+
+render()
+
+</script>
+
+</body>
+
+</html>
