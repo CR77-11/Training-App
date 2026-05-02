@@ -635,7 +635,12 @@ ctx.fill();
     ctx.fillStyle="#1f4e78";
     entries.forEach(e=>{
       ctx.beginPath();
-      ctx.arc(x(dayFromDate(e.date)),y(e.weight),4,0,Math.PI*2);
+      ctx.arc(...,5,...)
+ctx.fillStyle="white";
+ctx.fill();
+ctx.strokeStyle="#1f4e78";
+ctx.lineWidth=2;
+ctx.stroke();
       ctx.fill();
     });
   }
