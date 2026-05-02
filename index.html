@@ -753,6 +753,14 @@ function drawLoadChart(data){
     ctx.stroke();
   }
 
+  // X-Achse hervorheben
+ctx.strokeStyle="#999";
+ctx.lineWidth=1.5;
+ctx.beginPath();
+ctx.moveTo(x0, y0);
+ctx.lineTo(x1, y0);
+ctx.stroke();
+  
   ctx.fillStyle="#2f75b5";
   ctx.font="13px sans-serif";
   ctx.fillText("Blau: Belastung", x0, 18);
