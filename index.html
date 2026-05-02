@@ -347,6 +347,15 @@ input,select,textarea{
 <section id="exercises" class="tab">
 
 <div class="card">
+<h2>Interaktive Übungsansicht</h2>
+<p class="small">Tippe auf eine Übung, um Technik, Fehlerquellen und Hinweise zu öffnen.</p>
+</div>
+
+<div id="exerciseList"></div>
+
+</section>
+
+<div class="card">
 <h2>Übungsbibliothek</h2>
 <p class="small">Technik sauber vor Last. Schulterregel: kein stechender Schmerz, keine erzwungene Außenrotation.</p>
 </div>
@@ -481,7 +490,92 @@ function showTab(id,btn){
   document.getElementById(id).classList.add("active");
   document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
   btn.classList.add("active");
-  render();
+  const exercises = [
+  {
+    title:"Goblet Squat",
+    img:"bilder/goblet-squat.jpg",
+    focus:"Beine · Gesäß · Rumpf",
+    technique:"Gewicht nah vor der Brust halten. Füße etwa schulterbreit. Hüfte kontrolliert nach hinten und unten führen. Knie folgen den Fußspitzen. Rücken neutral halten und aus der ganzen Fußsohle aufrichten.",
+    mistakes:"Knie fallen nach innen, Fersen heben ab, Rundrücken, zu schnelles Absenken.",
+    shoulder:"Schulterfreundlich, solange das Gewicht nah am Körper bleibt."
+  },
+  {
+    title:"Rumänisches Kreuzheben",
+    img:"bilder/rdl.jpg",
+    focus:"Hintere Kette · Rückenstrecker · Gesäß",
+    technique:"Knie leicht beugen. Hüfte weit nach hinten schieben. Gewicht nah am Körper führen. Rücken neutral halten. Aufrichten durch Hüftstreckung.",
+    mistakes:"Rundrücken, Gewicht zu weit vom Körper, zu tiefe Bewegung, Schwung.",
+    shoulder:"Arme bleiben passiv. Keine aktive Schulterrotation erzwingen."
+  },
+  {
+    title:"Aerosling Rudern",
+    img:"bilder/aerosling-row.jpg",
+    focus:"Rücken · Schulterblattkontrolle · Core",
+    technique:"Körper als Linie halten. Schulterblätter zuerst leicht nach hinten unten führen, dann Ellenbogen körpernah ziehen. Kontrolliert zurück.",
+    mistakes:"Hüfte hängt durch, Schultern ziehen zu den Ohren, Ellenbogen zu weit außen.",
+    shoulder:"Nur schmerzfreie Zugbahn. Bei Außenrotationsschmerz Winkel flacher wählen."
+  },
+  {
+    title:"Step-Up",
+    img:"bilder/stepup.jpg",
+    focus:"Beine · Gesäß · Stabilität",
+    technique:"Ganzer Fuß auf der Bank. Druck über Ferse und Mittelfuß. Knie bleibt über dem Fuß. Kontrolliert auf- und absteigen.",
+    mistakes:"Abdruck aus hinterem Bein, Knie kippt nach innen, Bank zu hoch.",
+    shoulder:"Schulterneutral. Zusatzgewicht erst später."
+  },
+  {
+    title:"Plank",
+    img:"bilder/plank.jpg",
+    focus:"Rumpf · Körperspannung",
+    technique:"Ellenbogen unter Schultern. Bauch und Gesäß aktiv. Körper bildet eine stabile Linie. Ruhig atmen.",
+    mistakes:"Becken hängt durch, Gesäß zu hoch, Kopf überstreckt.",
+    shoulder:"Bei Schulterdruck auf erhöhter Bank ausführen."
+  },
+  {
+    title:"Rudermaschine Zone 2",
+    img:"bilder/rowing.jpg",
+    focus:"Grundlagenausdauer · Fettstoffwechsel",
+    technique:"Beine → Hüfte/Rumpf → Arme. Rückweg: Arme → Rumpf → Beine. Lange ruhige Züge.",
+    mistakes:"Zu früh mit Armen ziehen, Rundrücken, hektische Frequenz.",
+    shoulder:"Arme locker, Schultern tief. Kein Ziehen aus der Schulter."
+  },
+  {
+    title:"Schulter-Außenrotation isometrisch",
+    img:"bilder/shoulder-external-rotation.jpg",
+    focus:"Rotatorenmanschette · Schulterkontrolle",
+    technique:"Ellenbogen am Körper. Unterarm sanft gegen Wand oder Band nach außen drücken. 10–20 Sekunden halten.",
+    mistakes:"Schmerz erzwingen, Oberkörper mitdrehen, zu viel Widerstand.",
+    shoulder:"Nur schmerzfrei bis maximal leichtes Ziehen."
+  }
+];
+
+function renderExercises(){
+  const box = document.getElementById("exerciseList");
+  if(!box) return;
+
+  box.innerHTML = exercises.map((e,i)=>`
+    <div class="card exercise-card">
+      <h2 onclick="toggleExercise(${i})" style="cursor:pointer">
+        ${e.title}
+      </h2>
+
+      <div id="exercise-${i}" style="display:none">
+        <img src="${e.img}" class="exercise-img" alt="${e.title}" onerror="this.style.display='none'">
+
+        <p><strong>Fokus:</strong> ${e.focus}</p>
+        <p><strong>Technik:</strong> ${e.technique}</p>
+        <p><strong>Häufige Fehler:</strong> ${e.mistakes}</p>
+        <p><strong>Schulterhinweis:</strong> ${e.shoulder}</p>
+      </div>
+    </div>
+  `).join("");
+}
+
+function toggleExercise(i){
+  const el = document.getElementById("exercise-"+i);
+  el.style.display = el.style.display === "none" ? "block" : "none";
+}
+  renderExercises();
 }
 
 function getData(){
