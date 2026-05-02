@@ -1,746 +1,443 @@
 <!doctype html>
+
 <html lang="de">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Trainings-App Pro++</title>
 
 <style>
+
 :root{
+
   --blue:#1f4e78;
-  --blue2:#2f75b5;
-  --bg:#f5f8fb;
+
+  --bg:#f4f7fb;
+
   --card:#ffffff;
-  --text:#17324d;
-  --muted:#6b7c8f;
-  --green:#c6efce;
-  --yellow:#ffeb9c;
-  --red:#ffc7ce;
+
   --line:#d7e3ef;
-  --orange:#f39c12;
+
 }
-*{box-sizing:border-box}
+
 body{
+
   margin:0;
+
+  font-family:-apple-system, sans-serif;
+
   background:var(--bg);
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
 }
+
+/* Header */
+
 header{
-  position:sticky;
-  top:0;
-  z-index:10;
-  background:linear-gradient(135deg,var(--blue),var(--blue2));
+
+  background:linear-gradient(135deg,#1f4e78,#2f75b5);
+
   color:white;
-  padding:18px 14px 12px;
+
+  padding:20px;
+
   text-align:center;
-  box-shadow:0 2px 10px #0002;
+
 }
-h1{margin:0;font-size:23px}
-header p{margin:6px 0 12px;font-size:13px;opacity:.9}
+
 nav{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:6px;
+
+  display:flex;
+
+  gap:8px;
+
+  margin-top:10px;
+
+  flex-wrap:wrap;
+
+  justify-content:center;
+
 }
+
 nav button{
-  border:1px solid #ffffff55;
+
+  padding:10px 14px;
+
+  border-radius:12px;
+
+  border:1px solid #fff5;
+
   background:#ffffff22;
+
   color:white;
-  border-radius:12px;
-  padding:9px 4px;
-  font-size:13px;
-  font-weight:800;
+
+  font-weight:700;
+
 }
-nav button.active{background:white;color:var(--blue)}
-main{max-width:940px;margin:auto;padding:14px}
-.tab{display:none}
-.tab.active{display:block}
-.card{
-  background:var(--card);
-  border-radius:18px;
+
+nav button.active{
+
+  background:white;
+
+  color:#1f4e78;
+
+}
+
+/* Layout */
+
+main{
+
+  max-width:900px;
+
+  margin:auto;
+
   padding:16px;
-  margin-bottom:14px;
-  box-shadow:0 3px 14px #00000012;
+
 }
-h2{font-size:19px;margin:0 0 12px}
-h3{margin-bottom:6px}
-label{display:block;font-weight:750;margin-top:12px}
-input,select,textarea{
-  width:100%;
-  font-size:16px;
-  padding:12px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  margin-top:6px;
+
+.card{
+
   background:white;
-}
-textarea{min-height:72px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.metric{
-  background:#eef5fb;
+
+  padding:16px;
+
   border-radius:16px;
-  padding:13px;
-  text-align:center;
+
+  margin-bottom:16px;
+
+  box-shadow:0 4px 12px #0001;
+
 }
-.metric span{font-size:13px;color:var(--muted)}
-.metric strong{display:block;font-size:24px;margin-top:4px}
-.green{background:var(--green)!important}
-.yellow{background:var(--yellow)!important}
-.red{background:var(--red)!important}
-button{
-  border:0;
-  border-radius:13px;
-  padding:13px 14px;
-  font-size:16px;
-  font-weight:850;
-  margin-top:12px;
+
+.grid{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:10px;
+
 }
-.primary{background:var(--blue);color:white;width:100%}
-.secondary{background:#e8eef5;color:var(--text);width:100%}
-.danger{background:#f5d6d6;color:#7a1111;width:100%}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
-th{background:#eef5fb}
-canvas{
+
+/* Inputs */
+
+input,select{
+
   width:100%;
-  height:280px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:white;
-}
-.notice{
-  border-left:5px solid var(--blue);
-  background:#eef5fb;
-  border-radius:12px;
+
   padding:12px;
+
+  border-radius:10px;
+
+  border:1px solid var(--line);
+
+  font-size:16px;
+
+  min-height:48px;
+
 }
-.small{font-size:13px;color:var(--muted)}
-.badge{
-  display:inline-block;
-  background:#eef5fb;
-  border-radius:999px;
-  padding:5px 9px;
-  font-size:12px;
+
+/* FIX DATE FIELD */
+
+input[type="date"]{
+
+  appearance:none;
+
+  -webkit-appearance:none;
+
+  height:48px;
+
+}
+
+/* Buttons */
+
+button{
+
+  padding:12px;
+
+  border:none;
+
+  border-radius:12px;
+
   font-weight:800;
-  margin:2px;
+
 }
+
+.primary{
+
+  background:#1f4e78;
+
+  color:white;
+
+  width:100%;
+
+}
+
+/* Tabs */
+
+.tab{display:none;}
+
+.tab.active{display:block;}
+
+canvas{
+
+  width:100%;
+
+  height:260px;
+
+  border-radius:12px;
+
+  border:1px solid var(--line);
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <header>
+
 <h1>Trainings-App Pro++</h1>
-<p>Trainingslager · Saisonplan · Gewicht · Schulter · Belastung · Prognose</p>
+
 <nav>
-<button class="active" onclick="showTab('track',this)">Tracking</button>
-<button onclick="showTab('dash',this)">Dashboard</button>
-<button onclick="showTab('coach',this)">Coach</button>
-<button onclick="showTab('plan',this)">Plan</button>
-<button onclick="showTab('backup',this)">Backup</button>
+
+<button onclick="tab('track',this)" class="active">Tracking</button>
+
+<button onclick="tab('dash',this)">Dashboard</button>
+
 </nav>
+
 </header>
 
 <main>
 
-<section id="track" class="tab active">
+<!-- TRACKING -->
+
+<div id="track" class="tab active">
+
 <div class="card">
-<h2>Heutiger Eintrag</h2>
+
+<h2>Eintrag</h2>
 
 <div class="grid">
-  <div>
-    <label>Datum</label>
-    <input type="date" id="date">
-  </div>
-  <div>
-    <label>Gewicht Ist (kg)</label>
-    <input type="number" step="0.1" id="weight" placeholder="z. B. 104.6">
-  </div>
+
+<input type="date" id="date">
+
+<input type="number" id="weight" placeholder="Gewicht">
+
 </div>
 
-<div class="grid">
-  <div>
-    <label>Training Vormittag</label>
-    <select id="vm">
-      <option></option>
-      <option>Kraft A</option>
-      <option>Kraft B</option>
-      <option>Rudern Zone 2</option>
-      <option>Rudern Technik</option>
-      <option>Mobility / Schulter</option>
-      <option>Core</option>
-      <option>frei</option>
-    </select>
-  </div>
-  <div>
-    <label>Training Nachmittag</label>
-    <select id="nm">
-      <option></option>
-      <option>Mobility / Schulter</option>
-      <option>Rudern Technik</option>
-      <option>Core</option>
-      <option>Conditioning light</option>
-      <option>frei</option>
-    </select>
-  </div>
+<button class="primary" onclick="save()">Speichern</button>
+
 </div>
 
-<div class="grid">
-  <div>
-    <label>Dauer VM (min)</label>
-    <input type="number" id="dvm">
-  </div>
-  <div>
-    <label>Dauer NM (min)</label>
-    <input type="number" id="dnm">
-  </div>
 </div>
 
-<div class="grid">
-  <div>
-    <label>Belastung VM (1–5)</label>
-    <input type="number" min="0" max="5" id="lvm">
-  </div>
-  <div>
-    <label>Belastung NM (1–5)</label>
-    <input type="number" min="0" max="5" id="lnm">
-  </div>
-</div>
+<!-- DASHBOARD -->
 
-<div class="grid">
-  <div>
-    <label>Ø Puls</label>
-    <input type="number" id="hr" placeholder="z. B. 118">
-  </div>
-  <div>
-    <label>Ruder-Pace / 500 m</label>
-    <input id="pace" placeholder="z. B. 2:35">
-  </div>
-</div>
-
-<div class="grid">
-  <div>
-    <label>Schulter (0–5)</label>
-    <input type="number" min="0" max="5" id="shoulder">
-  </div>
-  <div>
-    <label>Energie (1–5)</label>
-    <input type="number" min="1" max="5" id="energy">
-  </div>
-</div>
-
-<label>Notizen</label>
-<textarea id="notes" placeholder="Schlaf, Schmerzen, Besonderheiten..."></textarea>
-
-<button class="primary" onclick="saveEntry()">Eintrag speichern</button>
-</div>
+<div id="dash" class="tab">
 
 <div class="card">
-<h2>Letzte Einträge</h2>
-<table>
-<thead>
-<tr><th>Datum</th><th>Training</th><th>Last</th><th>Schulter</th><th>Gewicht</th></tr>
-</thead>
-<tbody id="entryRows"></tbody>
-</table>
-</div>
-</section>
 
-<section id="dash" class="tab">
-<div class="card">
-<h2>Dashboard</h2>
-<div class="metrics">
-  <div class="metric"><span>Aktuelles Gewicht</span><strong id="currentWeight">–</strong></div>
-  <div class="metric"><span>Abnahme</span><strong id="loss">–</strong></div>
-  <div class="metric" id="loadBox"><span>Letzte Belastung</span><strong id="lastLoad">–</strong></div>
-  <div class="metric" id="shoulderBox"><span>Schulter</span><strong id="lastShoulder">–</strong></div>
-  <div class="metric"><span>Ø Belastung 7 Tage</span><strong id="avgLoad7">–</strong></div>
-  <div class="metric"><span>Prognose Woche 24</span><strong id="forecast">–</strong></div>
-</div>
+<h2>Gewicht</h2>
+
+<canvas id="chart"></canvas>
+
 </div>
 
-<div class="card">
-<h2>Gewichtsverlauf</h2>
-<canvas id="weightChart" width="760" height="300"></canvas>
-<p class="small">Blau = tatsächlicher Verlauf · Grau = Zielpfad · Orange = Prognose</p>
 </div>
-
-<div class="card">
-<h2>Belastung & Schulter</h2>
-<canvas id="loadChart" width="760" height="280"></canvas>
-<p class="small">Blau = Gesamtbelastung · Rot = Schulterstatus</p>
-</div>
-</section>
-
-<section id="coach" class="tab">
-<div class="card">
-<h2>Coach-Hinweis</h2>
-<div id="coachHint" class="notice">Noch keine Daten vorhanden.</div>
-</div>
-
-<div class="card">
-<h2>Empfehlung für nächste Einheit</h2>
-<div id="nextAdvice" class="notice">Noch keine Empfehlung möglich.</div>
-</div>
-
-<div class="card">
-<h2>Trainingssteuerung</h2>
-<p><span class="badge green">Grün</span> Belastung 3–6 und Schulter 0–1: normal weitertrainieren.</p>
-<p><span class="badge yellow">Gelb</span> Belastung niedrig oder Schulter 2–3: beobachten, nicht steigern.</p>
-<p><span class="badge red">Rot</span> Belastung &gt;6 oder Schulter 4–5: reduzieren/anpassen.</p>
-</div>
-</section>
-
-<section id="plan" class="tab">
-<div class="card">
-<h2>2 Intensivwochen – Trainingslager</h2>
-<p><span class="badge">Prinzip</span> Vormittag = Hauptreiz · Nachmittag = Ergänzung · keine Maximalbelastung</p>
-
-<table>
-<thead><tr><th>Tag</th><th>Woche 1</th><th>Woche 2</th></tr></thead>
-<tbody>
-<tr><td>Mo</td><td>Kraft A + Mobility</td><td>Kraft A 4 Runden + Mobility</td></tr>
-<tr><td>Di</td><td>Rudern Zone 2 40 min + Technik</td><td>Rudern Zone 2 50 min + Technik</td></tr>
-<tr><td>Mi</td><td>Kraft B + Core/Mobility</td><td>Kraft B intensiver + Core/Mobility</td></tr>
-<tr><td>Do</td><td>Rudern 40–45 min + Mobility</td><td>Rudern 50–55 min + Mobility</td></tr>
-<tr><td>Fr</td><td>Kraft A gesteigert + Conditioning light</td><td>Kraft A Peak + Conditioning light</td></tr>
-<tr><td>Sa</td><td>Rudern 45 min + Mobility</td><td>Rudern 60 min + lange Mobility</td></tr>
-<tr><td>So</td><td>frei</td><td>frei</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="card">
-<h2>Schulter-Regeln</h2>
-<p><span class="badge green">0–1</span> normal</p>
-<p><span class="badge yellow">2–3</span> beobachten, Volumen nicht erhöhen</p>
-<p><span class="badge red">4–5</span> Oberkörper reduzieren, Reha/Mobility priorisieren</p>
-</div>
-</section>
-
-<section id="backup" class="tab">
-<div class="card">
-<h2>Backup & Export</h2>
-<button class="secondary" onclick="exportCSV()">CSV exportieren</button>
-<button class="secondary" onclick="exportJSON()">Backup exportieren (.json)</button>
-
-<label>Backup importieren (.json)</label>
-<input type="file" accept=".json,application/json" onchange="importJSON(event)">
-
-<button class="danger" onclick="clearAll()">Alle Daten löschen</button>
-<p class="small">Daten werden lokal auf deinem Gerät gespeichert. Bitte regelmäßig Backup exportieren.</p>
-</div>
-</section>
 
 </main>
 
 <script>
-const KEY = "training_app_pro_plus_v2";
+
 const START_WEIGHT = 105;
-const TARGET_WEIGHT = 85;
-const START_DATE = new Date("2026-05-03T00:00:00");
-const WEEKS = 24;
-const TOTAL_DAYS = WEEKS * 7;
 
-document.getElementById("date").value = new Date().toISOString().slice(0,10);
+const TARGET = 85;
 
-function showTab(id,btn){
+const START_DATE = new Date("2026-05-03");
+
+const KEY="data_pro";
+
+date.value=new Date().toISOString().slice(0,10);
+
+function tab(id,btn){
+
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+
   document.getElementById(id).classList.add("active");
+
   document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+
   btn.classList.add("active");
+
   render();
+
 }
 
-function getData(){
-  return JSON.parse(localStorage.getItem(KEY) || "[]");
+function get(){
+
+  return JSON.parse(localStorage.getItem(KEY)||"[]");
+
 }
 
-function setData(data){
-  localStorage.setItem(KEY, JSON.stringify(data));
-}
+function save(){
 
-function num(id){
-  const v = document.getElementById(id).value;
-  return v === "" ? null : Number(v);
-}
+  let data=get();
 
-function saveEntry(){
-  const entry = {
-    date: date.value,
-    weight: num("weight"),
-    vm: vm.value,
-    nm: nm.value,
-    dvm: num("dvm"),
-    dnm: num("dnm"),
-    lvm: num("lvm") || 0,
-    lnm: num("lnm") || 0,
-    hr: num("hr"),
-    pace: pace.value,
-    shoulder: num("shoulder"),
-    energy: num("energy"),
-    notes: notes.value
-  };
+  data.push({
 
-  entry.load = entry.lvm + entry.lnm;
+    date:date.value,
 
-  let data = getData().filter(e => e.date !== entry.date);
-  data.push(entry);
+    weight:Number(weight.value)
+
+  });
+
   data.sort((a,b)=>a.date.localeCompare(b.date));
-  setData(data);
+
+  localStorage.setItem(KEY,JSON.stringify(data));
+
   render();
-  alert("Eintrag gespeichert.");
-}
 
-function loadClass(v){
-  if(v == null) return "";
-  if(v < 3) return "yellow";
-  if(v <= 6) return "green";
-  return "red";
-}
-
-function shoulderClass(v){
-  if(v == null) return "";
-  if(v <= 1) return "green";
-  if(v <= 3) return "yellow";
-  return "red";
 }
 
 function render(){
-  const data = getData();
-  const rows = document.getElementById("entryRows");
-  rows.innerHTML = "";
 
-  data.slice().reverse().slice(0,20).forEach(e=>{
-    rows.innerHTML += `
-      <tr>
-        <td>${e.date}</td>
-        <td>${e.vm || ""}<br>${e.nm || ""}</td>
-        <td>${e.load}</td>
-        <td>${e.shoulder ?? ""}</td>
-        <td>${e.weight ?? ""}</td>
-      </tr>`;
-  });
+  draw(get());
 
-  const weights = data.filter(e=>e.weight);
-  const last = data[data.length-1];
-  const lastWeight = weights[weights.length-1]?.weight;
-
-  currentWeight.textContent = lastWeight ? lastWeight.toFixed(1)+" kg" : "–";
-  loss.textContent = lastWeight ? (START_WEIGHT-lastWeight).toFixed(1)+" kg" : "–";
-  lastLoad.textContent = last ? last.load : "–";
-  lastShoulder.textContent = last?.shoulder ?? "–";
-
-  loadBox.className = "metric " + (last ? loadClass(last.load) : "");
-  shoulderBox.className = "metric " + (last ? shoulderClass(last.shoulder) : "");
-
-  const cutoff = new Date();
-  cutoff.setDate(cutoff.getDate()-7);
-  const last7 = data.filter(e=>new Date(e.date+"T00:00:00") >= cutoff);
-
-  avgLoad7.textContent = last7.length
-    ? (last7.reduce((s,e)=>s+e.load,0)/last7.length).toFixed(1)
-    : "–";
-
-  forecast.textContent = forecastWeight(weights);
-  coachHint.textContent = coachText(data);
-  nextAdvice.textContent = nextTrainingAdvice(data);
-
-  drawWeightChart(weights);
-  drawLoadChart(data);
 }
 
-function dayFromDate(dateStr){
-  const d = new Date(dateStr+"T00:00:00");
-  return (d - START_DATE) / 86400000;
-}
+function draw(data){
 
-function forecastWeight(entries){
-  if(entries.length < 2) return "–";
+  const c=chart;
 
-  const first = entries[0];
-  const last = entries[entries.length-1];
+  const ctx=c.getContext("2d");
 
-  const firstDay = dayFromDate(first.date);
-  const lastDay = dayFromDate(last.date);
-
-  if(lastDay <= firstDay) return "–";
-
-  const rate = (last.weight - first.weight) / (lastDay - firstDay);
-  const projectedEndWeight = last.weight + rate * (TOTAL_DAYS - lastDay);
-
-  return projectedEndWeight.toFixed(1)+" kg";
-}
-
-function coachText(data){
-  if(!data.length) return "Noch keine Daten vorhanden.";
-
-  const last = data[data.length-1];
-  const last3 = data.slice(-3);
-
-  if(data.slice(-2).some(e=>e.shoulder >= 4)){
-    return "Schulterwarnung: Oberkörperbelastung reduzieren, Mobility/Reha priorisieren.";
-  }
-
-  if(last3.length === 3 && last3.every(e=>e.load > 6)){
-    return "Überlastungsrisiko: 3 Tage in Folge hohe Belastung. Nächste Einheit reduzieren.";
-  }
-
-  if(data.slice(-2).some(e=>e.energy && e.energy <= 2)){
-    return "Energie niedrig: Schlaf, Ernährung und Regeneration prüfen. Heute moderat bleiben.";
-  }
-
-  if(last.load < 3){
-    return "Belastung zuletzt eher niedrig. Wenn Schulter stabil ist, nächste Einheit leicht steigern.";
-  }
-
-  return "Alles stabil: im grünen Bereich weiterarbeiten.";
-}
-
-function nextTrainingAdvice(data){
-  if(!data.length) return "Noch keine Empfehlung möglich.";
-
-  const last = data[data.length-1];
-
-  if(last.shoulder >= 4){
-    return "Nächste Einheit: Mobility/Schulter + lockeres Rudern. Kein Drücken, keine Dips, keine aggressiven Zugübungen.";
-  }
-
-  if(last.load > 6){
-    return "Nächste Einheit: Zone-2-Rudern oder Mobility. Kein zusätzlicher Kraftreiz.";
-  }
-
-  if(last.energy && last.energy <= 2){
-    return "Nächste Einheit: kurz und regenerativ. Fokus auf Technik, Mobility, lockeres Rudern.";
-  }
-
-  return "Nächste Einheit normal nach Plan. Belastung kontrolliert steigern.";
-}
-
-function drawWeightChart(entries){
-  const c = weightChart;
-  const ctx = c.getContext("2d");
   ctx.clearRect(0,0,c.width,c.height);
 
-  const pad = 45;
-  const minW = 80;
-  const maxW = 108;
-  const x0 = pad;
-  const y0 = c.height - pad;
-  const x1 = c.width - pad;
-  const y1 = pad;
+  const pad=40;
 
-  function y(kg){
-    return y0 - ((kg-minW)/(maxW-minW))*(y0-y1);
+  function y(w){
+
+    return c.height-pad - (w-80)/(110-80)*(c.height-2*pad);
+
   }
-
-  function xByDay(day){
-    return x0 + (day/TOTAL_DAYS)*(x1-x0);
-  }
-
-  ctx.strokeStyle="#d7e3ef";
-  ctx.lineWidth=1;
-
-  for(let i=0;i<=5;i++){
-    const yy = y0 - i*(y0-y1)/5;
-    ctx.beginPath();
-    ctx.moveTo(x0,yy);
-    ctx.lineTo(x1,yy);
-    ctx.stroke();
-    ctx.fillStyle="#17324d";
-    ctx.font="12px sans-serif";
-    ctx.fillText((minW+i*(maxW-minW)/5).toFixed(0)+" kg",5,yy+4);
-  }
-
-  ctx.fillStyle="#1f4e78";
-  ctx.font="13px sans-serif";
-  ctx.fillText("Blau: Ist", x0, 18);
-  ctx.fillStyle="#999";
-  ctx.fillText("Grau: Ziel", x0+90, 18);
-  ctx.fillStyle="#f39c12";
-  ctx.fillText("Orange: Prognose", x0+185, 18);
-
-  ctx.strokeStyle="#999";
-  ctx.setLineDash([6,6]);
-  ctx.lineWidth=2;
-  ctx.beginPath();
-  ctx.moveTo(x0,y(START_WEIGHT));
-  ctx.lineTo(x1,y(TARGET_WEIGHT));
-  ctx.stroke();
-  ctx.setLineDash([]);
-
-  if(entries.length){
-    ctx.strokeStyle="#1f4e78";
-    ctx.lineWidth=3;
-    ctx.beginPath();
-
-    entries.forEach((e,i)=>{
-      const xx = xByDay(dayFromDate(e.date));
-      const yy = y(e.weight);
-      if(i===0) ctx.moveTo(xx,yy);
-      else ctx.lineTo(xx,yy);
-    });
-
-    ctx.stroke();
-
-    ctx.fillStyle="#1f4e78";
-    entries.forEach(e=>{
-      ctx.beginPath();
-      ctx.arc(xByDay(dayFromDate(e.date)),y(e.weight),4,0,Math.PI*2);
-      ctx.fill();
-    });
-  }
-
-  if(entries.length >= 2){
-    const first = entries[0];
-    const last = entries[entries.length-1];
-
-    const firstDay = dayFromDate(first.date);
-    const lastDay = dayFromDate(last.date);
-
-    if(lastDay > firstDay){
-      const rate = (last.weight - first.weight) / (lastDay - firstDay);
-      const projectedEndWeight = last.weight + rate * (TOTAL_DAYS - lastDay);
-
-      ctx.strokeStyle="#f39c12";
-      ctx.lineWidth=3;
-      ctx.setLineDash([4,5]);
-      ctx.beginPath();
-      ctx.moveTo(xByDay(lastDay), y(last.weight));
-      ctx.lineTo(xByDay(TOTAL_DAYS), y(projectedEndWeight));
-      ctx.stroke();
-      ctx.setLineDash([]);
-    }
-  }
-}
-
-function drawLoadChart(data){
-  const c = loadChart;
-  const ctx = c.getContext("2d");
-  ctx.clearRect(0,0,c.width,c.height);
-
-  const pad = 40;
-  const x0 = pad;
-  const y0 = c.height-pad;
-  const x1 = c.width-pad;
-  const y1 = pad;
 
   function x(i){
-    return x0 + i*Math.max(1,(x1-x0)/Math.max(1,data.length-1));
+
+    return pad + i*(c.width-2*pad)/Math.max(1,data.length-1);
+
   }
 
-  function y(v){
-    return y0 - (v/8)*(y0-y1);
-  }
+  // IST
 
-  ctx.strokeStyle="#d7e3ef";
-  ctx.lineWidth=1;
+  ctx.strokeStyle="#1f4e78";
 
-  for(let i=0;i<=4;i++){
-    const yy = y0 - i*(y0-y1)/4;
-    ctx.beginPath();
-    ctx.moveTo(x0,yy);
-    ctx.lineTo(x1,yy);
-    ctx.stroke();
-  }
+  ctx.beginPath();
 
-  ctx.fillStyle="#2f75b5";
-  ctx.font="13px sans-serif";
-  ctx.fillText("Blau: Belastung", x0, 18);
-  ctx.fillStyle="#c0504d";
-  ctx.fillText("Rot: Schulter", x0+130, 18);
+  data.forEach((e,i)=>{
 
-  if(data.length){
-    ctx.strokeStyle="#2f75b5";
-    ctx.lineWidth=3;
-    ctx.beginPath();
+    if(i===0) ctx.moveTo(x(i),y(e.weight));
 
-    data.forEach((e,i)=>{
-      const xx = x(i);
-      const yy = y(e.load);
-      if(i===0) ctx.moveTo(xx,yy);
-      else ctx.lineTo(xx,yy);
-    });
+    else ctx.lineTo(x(i),y(e.weight));
 
-    ctx.stroke();
+  });
 
-    ctx.strokeStyle="#c0504d";
-    ctx.lineWidth=3;
-    ctx.beginPath();
+  ctx.stroke();
 
-    data.forEach((e,i)=>{
-      const xx = x(i);
-      const yy = y(e.shoulder || 0);
-      if(i===0) ctx.moveTo(xx,yy);
-      else ctx.lineTo(xx,yy);
-    });
+  // TREND
 
-    ctx.stroke();
-  }
-}
+  if(data.length>=7){
 
-function exportCSV(){
-  const data = getData();
-  const header = [
-    "Datum","VM","Dauer VM","Puls","Pace","Last VM",
-    "NM","Dauer NM","Last NM","Gesamt","Schulter","Energie","Gewicht","Notizen"
-  ];
+    let avg=[];
 
-  const rows = data.map(e=>[
-    e.date,e.vm,e.dvm,e.hr,e.pace,e.lvm,e.nm,e.dnm,e.lnm,e.load,e.shoulder,e.energy,e.weight,e.notes
-  ]);
+    for(let i=0;i<data.length;i++){
 
-  const csv = [header,...rows]
-    .map(r=>r.map(v=>`"${String(v ?? "").replaceAll('"','""')}"`).join(";"))
-    .join("\n");
+      let slice=data.slice(Math.max(0,i-6),i+1);
 
-  download(csv,"trainings_tracking.csv","text/csv");
-}
+      avg.push(slice.reduce((s,e)=>s+e.weight,0)/slice.length);
 
-function exportJSON(){
-  download(JSON.stringify(getData(),null,2),"trainings_backup.json","application/json");
-}
-
-function importJSON(event){
-  const file = event.target.files[0];
-  if(!file) return;
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    try{
-      const imported = JSON.parse(reader.result);
-      if(!Array.isArray(imported)) throw new Error();
-      setData(imported);
-      render();
-      alert("Backup importiert.");
-    }catch(e){
-      alert("Import fehlgeschlagen.");
     }
-  };
-  reader.readAsText(file);
-}
 
-function download(content,name,type){
-  const blob = new Blob([content],{type});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = name;
-  a.click();
-  URL.revokeObjectURL(url);
-}
+    ctx.strokeStyle="#2f75b5";
 
-function clearAll(){
-  if(confirm("Wirklich alle Daten löschen?")){
-    localStorage.removeItem(KEY);
-    render();
+    ctx.beginPath();
+
+    avg.forEach((v,i)=>{
+
+      if(i===0) ctx.moveTo(x(i),y(v));
+
+      else ctx.lineTo(x(i),y(v));
+
+    });
+
+    ctx.stroke();
+
+    // PROGNOSE
+
+    if(avg.length>=10){
+
+      let last=avg.at(-1);
+
+      let prev=avg.at(-8);
+
+      let rate=(last-prev)/7;
+
+      let future=last + rate*60;
+
+      ctx.strokeStyle="orange";
+
+      ctx.setLineDash([5,5]);
+
+      ctx.beginPath();
+
+      ctx.moveTo(x(data.length-1),y(last));
+
+      ctx.lineTo(x(data.length+10),y(future));
+
+      ctx.stroke();
+
+      ctx.setLineDash([]);
+
+    }
+
   }
+
+  // ZIELKORRIDOR
+
+  ctx.fillStyle="rgba(100,100,100,0.15)";
+
+  for(let i=0;i<100;i++){
+
+    let slow=START_WEIGHT - i*0.5/7;
+
+    let fast=START_WEIGHT - i*0.8/7;
+
+    ctx.fillRect(
+
+      pad+i*5,
+
+      y(slow),
+
+      3,
+
+      y(fast)-y(slow)
+
+    );
+
+  }
+
 }
 
 render();
+
 </script>
 
 </body>
+
 </html>
