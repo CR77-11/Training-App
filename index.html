@@ -1000,16 +1000,13 @@ function renderExercises(){
   if(!box) return;
 
   const shoulder = exercises.filter(e => e.category === "Schulter Reha");
+  const others = exercises.filter(e => e.category !== "Schulter Reha");
 
-  box.innerHTML = `
-    <div class="card">
-      <h2>Schulter Reha PRO</h2>
-      <p class="small">Mehrere Schulterübungen mit GIFs. Schmerzfrei arbeiten, langsam ausführen, keine Bewegung erzwingen.</p>
-    </div>
-    ${shoulder.map((e,i)=>`
+  function renderCards(list){
+    return list.map((e,i)=>`
       <div class="card exercise-card">
-        <h2 onclick="toggleExercise(${i})" style="cursor:pointer">${e.title}</h2>
-        <div id="exercise-${i}" style="display:none">
+        <h2 onclick="toggleExercise('${e.title}')" style="cursor:pointer">${e.title}</h2>
+        <div id="exercise-${e.title}" style="display:none">
           <img src="${e.img}" class="exercise-img" alt="${e.title}" onerror="this.style.border='3px solid red'">
           <p><strong>Fokus:</strong> ${e.focus}</p>
           <p><strong>Technik:</strong> ${e.technique}</p>
@@ -1017,10 +1014,25 @@ function renderExercises(){
           <p><strong>Schulterhinweis:</strong> ${e.shoulder}</p>
         </div>
       </div>
-    `).join("")}
+    `).join("");
+  }
+
+  box.innerHTML = `
+    <div class="card">
+      <h2>Alle Übungen</h2>
+    </div>
+    ${renderCards(others)}
+
+    <div class="card">
+      <h2 onclick="toggleSection('shoulderSection')" style="cursor:pointer">
+        Schulter Reha PRO ⌄
+      </h2>
+      <div id="shoulderSection" style="display:none">
+        ${renderCards(shoulder)}
+      </div>
+    </div>
   `;
 }
-
 function toggleExercise(i){
   const el = document.getElementById("exercise-"+i);
   el.style.display = el.style.display === "none" ? "block" : "none";
