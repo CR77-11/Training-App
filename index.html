@@ -1037,15 +1037,15 @@ box.innerHTML = `
 
   ${renderCards(others)}
 
-  <div class="card">
-    <h2 onclick="toggleSection('shoulderSection')" style="cursor:pointer">
-      Schulter Reha PRO ⌄
-    </h2>
+<div class="card">
+  <h2 onclick="toggleSection('shoulderSection')" style="cursor:pointer">
+    Schulter Reha PRO ⌄
+  </h2>
 
-    <div id="shoulderSection" class="collapsible">
-      ${renderCards(shoulder)}
-    </div>
+  <div id="shoulderSection" class="collapsible">
+    ${renderCards(shoulder)}
   </div>
+</div>
 `;
 }
   
@@ -1053,9 +1053,9 @@ function toggleExercise(i){
   const el = document.getElementById("exercise-"+i);
   el.style.display = el.style.display === "none" ? "block" : "none";
 }
-  function toggleSection(id){
+function toggleSection(id){
   const el = document.getElementById(id);
-  el.style.display = el.style.display === "none" ? "block" : "none";
+  el.classList.toggle("open");
 }
   
 render();
