@@ -1019,7 +1019,7 @@ function renderExercises(){
     return list.map((e,i)=>`
       <div class="card exercise-card">
         <h2 onclick="toggleExercise('${e.title}')" style="cursor:pointer">${e.title}</h2>
-        <div id="exercise-${e.title}" style="display:none">
+        <div id="exercise-${e.title}" class="collapsible">
           <img src="${e.img}" class="exercise-img" alt="${e.title}" onerror="this.style.border='3px solid red'">
           <p><strong>Fokus:</strong> ${e.focus}</p>
           <p><strong>Technik:</strong> ${e.technique}</p>
@@ -1051,7 +1051,7 @@ box.innerHTML = `
   
 function toggleExercise(i){
   const el = document.getElementById("exercise-"+i);
-  el.style.display = el.style.display === "none" ? "block" : "none";
+  el.classList.toggle("open");
 }
 function toggleSection(id){
   const el = document.getElementById(id);
