@@ -990,7 +990,7 @@ function renderExercises(){
   const box = document.getElementById("exerciseList");
   if(!box) return;
 
-  const shoulder = exercises.filter(e => e.category === "Schulter Reha");
+  const shoulder = exercises;
 
   box.innerHTML = `
     <div class="card">
