@@ -19,7 +19,20 @@
   --line:#d7e3ef;
   --orange:#f39c12;
 }
-*{box-sizing:border-box}
+  .collapsible{
+  overflow:hidden;
+  max-height:0;
+  opacity:0;
+  transition:max-height .35s ease, opacity .25s ease;
+}
+
+.collapsible.open{
+  max-height:2000px;
+  opacity:1;
+}
+  
+*{box-sizing:border-box}.collapsible
+
 body{
   margin:0;
   background:var(--bg);
@@ -1017,24 +1030,30 @@ function renderExercises(){
     `).join("");
   }
 
-  box.innerHTML = `
-    <div class="card">
-      <h2>Alle Übungen</h2>
-    </div>
-    ${renderCards(others)}
+box.innerHTML = `
+  <div class="card">
+    <h2>Alle Übungen</h2>
+  </div>
 
-    <div class="card">
-      <h2 onclick="toggleSection('shoulderSection')" style="cursor:pointer">
-        Schulter Reha PRO ⌄
-      </h2>
-      <div id="shoulderSection" style="display:none">
-        ${renderCards(shoulder)}
-      </div>
+  ${renderCards(others)}
+
+  <div class="card">
+    <h2 onclick="toggleSection('shoulderSection')" style="cursor:pointer">
+      Schulter Reha PRO ⌄
+    </h2>
+
+    <div id="shoulderSection" class="collapsible">
+      ${renderCards(shoulder)}
     </div>
-  `;
-}
+  </div>
+`;
+  
 function toggleExercise(i){
   const el = document.getElementById("exercise-"+i);
+  el.style.display = el.style.display === "none" ? "block" : "none";
+}
+  function toggleSection(id){
+  const el = document.getElementById(id);
   el.style.display = el.style.display === "none" ? "block" : "none";
 }
   
