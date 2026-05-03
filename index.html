@@ -904,60 +904,49 @@ function clearAll(){
 
 const exercises = [
   {
-    title:"Goblet Squat",
-    img:"bilder/goblet-squat.gif",
-    focus:"Beine · Gesäß · Rumpf",
-    technique:"Gewicht nah vor der Brust halten. Füße etwa schulterbreit. Hüfte kontrolliert nach hinten/unten führen. Knie folgen den Fußspitzen. Rücken neutral. Aus der ganzen Fußsohle aufrichten.",
-    mistakes:"Knie fallen nach innen, Fersen heben ab, Rundrücken, zu schnelles Absenken.",
-    shoulder:"Schulterfreundlich, solange das Gewicht nah am Körper bleibt."
+    category:"Schulter Reha",
+    title:"Außenrotation mit Band",
+    img:"bilder/shoulder-external.gif",
+    focus:"Rotatorenmanschette · Schulterstabilität",
+    technique:"Ellbogen eng am Körper halten. Unterarm langsam nach außen führen. Schulter bleibt tief, Bewegung kontrolliert zurückführen.",
+    mistakes:"Ellbogen löst sich vom Körper, Schulter zieht hoch, zu viel Zugspannung.",
+    shoulder:"Ideal als Reha- und Aktivierungsübung."
   },
   {
-    title:"Rumänisches Kreuzheben",
-    img:"bilder/rdl.gif",
-    focus:"Hintere Kette · Gesäß · Rückenstrecker",
-    technique:"Knie leicht beugen. Hüfte weit nach hinten schieben. Gewicht nah am Körper führen. Rücken neutral halten. Aufrichten durch Hüftstreckung.",
-    mistakes:"Rundrücken, Gewicht zu weit vom Körper entfernt, zu tiefe Bewegung, Schwung.",
-    shoulder:"Arme bleiben passiv. Keine aktive Schulterrotation erzwingen."
+    category:"Schulter Reha",
+    title:"Innenrotation mit Band",
+    img:"bilder/shoulder-internal.gif",
+    focus:"Innenrotatoren · Schulterkontrolle",
+    technique:"Ellbogen am Körper fixieren. Band kontrolliert nach innen ziehen. Handgelenk bleibt gerade.",
+    mistakes:"Oberkörper dreht mit, Ellbogen wandert weg, zu schnelles Zurücklassen.",
+    shoulder:"Gute Ergänzung zur Außenrotation."
   },
   {
-    title:"Aerosling Rudern",
-    img:"bilder/aerosling-row.gif",
-    focus:"Rücken · Schulterblattkontrolle · Core",
-    technique:"Körper als stabile Linie halten. Schulterblätter zuerst leicht nach hinten/unten führen, dann Ellenbogen körpernah ziehen. Kontrolliert zurück.",
-    mistakes:"Hüfte hängt durch, Schultern ziehen zu den Ohren, Ellenbogen zu weit außen.",
-    shoulder:"Nur schmerzfreie Zugbahn. Bei Außenrotationsschmerz Körperwinkel flacher wählen."
+    category:"Schulter Reha",
+    title:"Wall Slides",
+    img:"bilder/wall-slides.gif",
+    focus:"Schulterbeweglichkeit · Schulterblattführung",
+    technique:"Unterarme an der Wand nach oben schieben. Rippen unten halten. Schulterblätter gleiten kontrolliert mit.",
+    mistakes:"Hohlkreuz, Schultern zu den Ohren, Arme erzwingen Höhe.",
+    shoulder:"Sehr gut für Beweglichkeit und Kontrolle."
   },
   {
-    title:"Step-Up / Bankaufstieg",
-    img:"bilder/stepup.gif",
-    focus:"Beine · Gesäß · Stabilität",
-    technique:"Ganzer Fuß steht auf der Bank. Druck über Ferse und Mittelfuß. Knie bleibt stabil über dem Fuß. Oberkörper aufrecht. Kontrolliert auf- und absteigen.",
-    mistakes:"Abdruck stark aus dem hinteren Bein, Knie kippt nach innen, Bank zu hoch, unkontrolliertes Absteigen.",
-    shoulder:"Schulterneutral. Zusatzgewicht erst verwenden, wenn die Bewegung stabil ist."
+    category:"Schulter Reha",
+    title:"Scapula Rows",
+    img:"bilder/scapula-rows.gif",
+    focus:"Schulterblattkontrolle · oberer Rücken",
+    technique:"Arme fast gestreckt halten. Nur Schulterblätter nach hinten/unten ziehen. Danach langsam lösen.",
+    mistakes:"Zu viel Armzug, Rundrücken, Nacken anspannen.",
+    shoulder:"Sehr wichtig für stabile Schulterposition."
   },
   {
-    title:"Unterarmstütz / Plank",
-    img:"bilder/plank.gif",
-    focus:"Rumpf · Körperspannung · Schulterstabilität",
-    technique:"Ellenbogen unter den Schultern. Bauch und Gesäß aktiv anspannen. Körper bildet eine gerade Linie. Ruhig weiteratmen.",
-    mistakes:"Becken hängt durch, Gesäß zu hoch, Kopf überstreckt, Schultern kollabieren.",
-    shoulder:"Bei Schulterdruck auf erhöhter Bank oder kürzer halten."
-  },
-  {
-    title:"Rudermaschine Zone 2",
-    img:"bilder/rowing.gif",
-    focus:"Grundlagenausdauer · Technik · Fettstoffwechsel",
-    technique:"Zugfolge: Beine → Hüfte/Rumpf → Arme. Rückweg: Arme → Rumpf → Beine. Lange ruhige Züge, gleichmäßiger Rhythmus.",
-    mistakes:"Zu früh mit den Armen ziehen, Rundrücken, hektische Frequenz, Schultern hochziehen.",
-    shoulder:"Arme locker führen, Schultern tief lassen. Nicht aus der Schulter reißen."
-  },
-  {
-    title:"Schulter-Außenrotation isometrisch",
-    img:"bilder/shoulder-external-rotation.gif",
-    focus:"Rotatorenmanschette · Schulterkontrolle · Reha",
-    technique:"Ellenbogen am Körper halten. Unterarm sanft gegen Wand oder Band nach außen drücken. Spannung 10–20 Sekunden halten, ruhig atmen.",
-    mistakes:"Schmerz erzwingen, Oberkörper mitdrehen, zu viel Widerstand, Schulter hochziehen.",
-    shoulder:"Nur schmerzfrei bis maximal leichtes Ziehen. Keine aggressive Außenrotation."
+    category:"Schulter Reha",
+    title:"Schulter Extension mit Band",
+    img:"bilder/shoulder-extension.gif",
+    focus:"hintere Schulter · Lat · Schulterkontrolle",
+    technique:"Band mit gestreckten Armen nach hinten/unten ziehen. Brust bleibt offen, Schultern tief.",
+    mistakes:"Schwung, Rundrücken, Arme zu stark beugen.",
+    shoulder:"Schonende Kräftigung der hinteren Schulter."
   }
 ];
 
@@ -965,18 +954,26 @@ function renderExercises(){
   const box = document.getElementById("exerciseList");
   if(!box) return;
 
-  box.innerHTML = exercises.map((e,i)=>`
-    <div class="card exercise-card">
-      <h2 onclick="toggleExercise(${i})" style="cursor:pointer">${e.title}</h2>
-      <div id="exercise-${i}" style="display:none">
-        <img src="${e.img}" class="exercise-img" onerror="this.style.display='none'">
-        <p><strong>Fokus:</strong> ${e.focus}</p>
-        <p><strong>Technik:</strong> ${e.technique}</p>
-        <p><strong>Fehler:</strong> ${e.mistakes}</p>
-        <p><strong>Schulter:</strong> ${e.shoulder}</p>
-      </div>
+  const shoulder = exercises.filter(e => e.category === "Schulter Reha");
+
+  box.innerHTML = `
+    <div class="card">
+      <h2>Schulter Reha PRO</h2>
+      <p class="small">Mehrere Schulterübungen mit GIFs. Schmerzfrei arbeiten, langsam ausführen, keine Bewegung erzwingen.</p>
     </div>
-  `).join("");
+    ${shoulder.map((e,i)=>`
+      <div class="card exercise-card">
+        <h2 onclick="toggleExercise(${i})" style="cursor:pointer">${e.title}</h2>
+        <div id="exercise-${i}" style="display:none">
+          <img src="${e.img}" class="exercise-img" alt="${e.title}" onerror="this.style.display='none'">
+          <p><strong>Fokus:</strong> ${e.focus}</p>
+          <p><strong>Technik:</strong> ${e.technique}</p>
+          <p><strong>Häufige Fehler:</strong> ${e.mistakes}</p>
+          <p><strong>Schulterhinweis:</strong> ${e.shoulder}</p>
+        </div>
+      </div>
+    `).join("")}
+  `;
 }
 
 function toggleExercise(i){
