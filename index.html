@@ -477,7 +477,9 @@ function saveEntry(){
     notes: notes.value
   };
 
-  entry.load = entry.lvm + entry.lnm;
+  entry.load =
+  ((entry.dvm || 0) * (entry.lvm || 0)) +
+  ((entry.dnm || 0) * (entry.lnm || 0));
 
   let data = getData().filter(e => e.date !== entry.date);
   data.push(entry);
