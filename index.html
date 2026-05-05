@@ -337,7 +337,7 @@ input,select,textarea{
 <h2>Dashboard</h2>
 <div class="metrics">
   <div class="metric"><span>Aktuelles Gewicht</span><strong id="currentWeight">–</strong></div>
-  <div class="metric"><span>Abnahme</span><strong id="loss">–</strong></div>
+  <div class="metric"><span>Änderung</span><strong id="loss">–</strong></div>
   <div class="metric" id="loadBox"><span>Letzte Belastung</span><strong id="lastLoad">–</strong></div>
   <div class="metric" id="shoulderBox"><span>Schulter</span><strong id="lastShoulder">–</strong></div>
   <div class="metric"><span>Ø Belastung 7 Tage</span><strong id="avgLoad7">–</strong></div>
@@ -524,7 +524,17 @@ function render(){
   const lastWeight = weights[weights.length-1]?.weight;
 
   currentWeight.textContent = lastWeight ? lastWeight.toFixed(1)+" kg" : "–";
-  loss.textContent = lastWeight ? (START_WEIGHT-lastWeight).toFixed(1)+" kg" : "–";
+  if(lastWeight){
+  const diff = START_WEIGHT - lastWeight;
+
+  if(diff >= 0){
+    loss.textContent = diff.toFixed(1) + " kg";
+  }else{
+    loss.textContent = "+" + Math.abs(diff).toFixed(1) + " kg";
+  }
+}else{
+  loss.textContent = "–";
+}
   lastLoad.textContent = last ? last.load : "–";
   lastShoulder.textContent = last?.shoulder ?? "–";
 
