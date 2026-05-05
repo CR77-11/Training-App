@@ -527,17 +527,25 @@ function render(){
 if(lastWeight){
   const diff = START_WEIGHT - lastWeight;
 
-  loss.textContent = (diff > 0 ? "-" : "+") + Math.abs(diff).toFixed(1) + " kg";
-
-  loss.parentElement.classList.remove("green","red","yellow");
+  let symbol = "";
+  let color = "";
 
   if(diff > 0){
-    loss.parentElement.classList.add("green"); // Abnahme
+    symbol = "↓ ";
+    color = "green";
   } else if(diff < 0){
-    loss.parentElement.classList.add("red");   // Zunahme
+    symbol = "↑ ";
+    color = "red";
   } else {
-    loss.parentElement.classList.add("yellow");
+    symbol = "→ ";
+    color = "yellow";
   }
+
+  loss.textContent = symbol + Math.abs(diff).toFixed(1) + " kg";
+
+  loss.parentElement.classList.remove("green","red","yellow");
+  loss.parentElement.classList.add(color);
+
 }else{
   loss.textContent = "–";
 }
