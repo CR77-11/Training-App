@@ -524,13 +524,19 @@ function render(){
   const lastWeight = weights[weights.length-1]?.weight;
 
   currentWeight.textContent = lastWeight ? lastWeight.toFixed(1)+" kg" : "–";
-  if(lastWeight){
+if(lastWeight){
   const diff = START_WEIGHT - lastWeight;
 
-  if(diff >= 0){
-    loss.textContent = diff.toFixed(1) + " kg";
-  }else{
-    loss.textContent = "+" + Math.abs(diff).toFixed(1) + " kg";
+  loss.textContent = (diff > 0 ? "-" : "+") + Math.abs(diff).toFixed(1) + " kg";
+
+  loss.parentElement.classList.remove("green","red","yellow");
+
+  if(diff > 0){
+    loss.parentElement.classList.add("green"); // Abnahme
+  } else if(diff < 0){
+    loss.parentElement.classList.add("red");   // Zunahme
+  } else {
+    loss.parentElement.classList.add("yellow");
   }
 }else{
   loss.textContent = "–";
