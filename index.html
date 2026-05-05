@@ -1031,7 +1031,7 @@ function renderExercises(){
       <div class="card exercise-card">
         <h2 onclick="toggleExercise('${e.title}')" style="cursor:pointer">${e.title}</h2>
         <div id="exercise-${e.title}" class="collapsible">
-          <img src="${e.img}" class="exercise-img" alt="${e.title}" onerror="this.style.border='3px solid red'">
+          <img src="${e.img}?v=13" class="exercise-img" alt="${e.title}" onerror="this.style.border='3px solid red'">
           <p><strong>Fokus:</strong> ${e.focus}</p>
           <p><strong>Technik:</strong> ${e.technique}</p>
           <p><strong>Häufige Fehler:</strong> ${e.mistakes}</p>
