@@ -660,20 +660,31 @@ ctx.setLineDash([]);
   
   // Ist-Werte
   if(entries.length){
-    ctx.strokeStyle="#1f4e78";
-    ctx.lineWidth=3;
+ctx.strokeStyle="#1f4e78";
+ctx.lineWidth=3;
 ctx.lineJoin="round";
 ctx.lineCap="round";
-    ctx.beginPath();
 
-    entries.forEach((e,i)=>{
-      const xx = x(dayFromDate(e.date));
-      const yy = y(e.weight);
-      if(i===0) ctx.moveTo(xx,yy);
-      else ctx.lineTo(xx,yy);
-    });
+const points = entries.map(e => ({
+  x: x(dayFromDate(e.date)),
+  y: y(e.weight)
+}));
 
-    ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(points[0].x, points[0].y);
+
+for(let i=1; i<points.length-1; i++){
+  const midX = (points[i].x + points[i+1].x) / 2;
+  const midY = (points[i].y + points[i+1].y) / 2;
+  ctx.quadraticCurveTo(points[i].x, points[i].y, midX, midY);
+}
+
+if(points.length > 1){
+  const last = points[points.length-1];
+  ctx.lineTo(last.x, last.y);
+}
+
+ctx.stroke();
 
     // Verlauf unter Ist-Kurve (Premium Look)
 const gradient = ctx.createLinearGradient(0, y1, 0, y0);
