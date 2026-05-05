@@ -865,9 +865,11 @@ function drawLoadChart(data){
     return x0 + i*Math.max(1,(x1-x0)/Math.max(1,data.length-1));
   }
 
-  function y(v){
-    return y0 - (v/8)*(y0-y1);
-  }
+  const maxLoad = Math.max(...data.map(e => e.load || 0), 10);
+
+function y(v){
+  return y0 - (v / maxLoad) * (y0 - y1);
+}
 
   ctx.strokeStyle="#d7e3ef";
   ctx.lineWidth=1;
